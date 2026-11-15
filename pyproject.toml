@@ -1,0 +1,59 @@
+[project]
+name = "pytest-llm-cost"
+version = "0.1.0"
+description = "pytest plugin: what each test's OpenAI, Anthropic and LiteLLM calls cost in USD, with a budget that fails the run"
+readme = "docs/usage.md"
+authors = [{ name = "Matthew Busel" }]
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.9"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Framework :: Pytest",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+keywords = ["pytest", "llm", "cost", "budget", "tokens", "openai", "anthropic", "litellm", "evals"]
+dependencies = [
+    "pytest>=7",
+    "llm-prices>=1.3",
+]
+
+[project.urls]
+Homepage = "https://github.com/Mattbusel/pytest-llm-cost"
+Documentation = "https://github.com/Mattbusel/pytest-llm-cost/blob/main/docs/usage.md"
+Changelog = "https://github.com/Mattbusel/pytest-llm-cost/blob/main/CHANGELOG.md"
+Issues = "https://github.com/Mattbusel/pytest-llm-cost/issues"
+Prices = "https://github.com/Mattbusel/llm-prices"
+
+[project.entry-points.pytest11]
+llm_cost = "pytest_llm_cost.plugin"
+
+[project.optional-dependencies]
+test = ["openai", "anthropic", "pytest-xdist"]
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-p pytester"
+
+[tool.ruff]
+target-version = "py39"
+line-length = 110
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "I"]
+ignore = ["E501"]
+
+[tool.black]
+line-length = 110
